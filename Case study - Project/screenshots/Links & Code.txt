@@ -1,0 +1,1190 @@
+LINKS:
+    
+C:/Users/Sherwin%20A/Downloads/Cognos%20Project/Safeguard-insurance.html
+
+
+https://resplendent-malabi-39e78e.netlify.app/
+
+
+CODE:
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>IBM Cognos Analytics | Executive Dashboard Suite</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* ========= DARK THEME (DEFAULT) ========= */
+        body.dark-theme {
+            --bg-primary: #0A0C10;
+            --bg-secondary: #0B0E14;
+            --bg-card: #10131C;
+            --bg-header: #0E121C;
+            --bg-tab: transparent;
+            --bg-input: #0E1118;
+            --text-primary: #EFF1F5;
+            --text-secondary: #9AA4BF;
+            --text-muted: #5C6785;
+            --border-color: #1E2532;
+            --border-light: #212836;
+            --border-input: #262D3A;
+            --card-hover: #2F3A4E;
+            --tab-active: linear-gradient(95deg, #1E6AD4, #1A4C8C);
+            --tab-hover: #1A1F2A;
+            --login-bg: radial-gradient(circle at 20% 30%, #0F1219, #030507);
+            --login-card-bg: rgba(18, 22, 30, 0.9);
+            --fullscreen-btn-bg: #1A1F2A;
+            --fullscreen-btn-border: #2A3A4A;
+            --fullscreen-btn-hover: #2A7DE1;
+            --logout-btn-bg: rgba(255, 70, 85, 0.15);
+            --logout-btn-border: rgba(255, 80, 95, 0.4);
+            --logout-btn-hover: rgba(255, 70, 85, 0.4);
+            --badge-bg: #1E2A3A;
+            --gradient-text: linear-gradient(120deg, #FFFFFF, #9BB8FF);
+            --gradient-logo: linear-gradient(135deg, #2A7DE1, #00C9FF);
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --particle-color: rgba(42, 125, 225, 0.3);
+            --fullscreen-overlay: rgba(0, 0, 0, 0.95);
+            --summary-card: #0D1117;
+            --stat-bg: rgba(42, 125, 225, 0.1);
+        }
+
+        /* ========= LIGHT THEME ========= */
+        body.light-theme {
+            --bg-primary: #F1F4F9;
+            --bg-secondary: #FFFFFF;
+            --bg-card: #FFFFFF;
+            --bg-header: #F8FAFE;
+            --bg-tab: transparent;
+            --bg-input: #FFFFFF;
+            --text-primary: #1A1F2E;
+            --text-secondary: #5B6B8C;
+            --text-muted: #8E9DB2;
+            --border-color: #E2E8F0;
+            --border-light: #E2E8F0;
+            --border-input: #CBD5E1;
+            --card-hover: #E2E8F0;
+            --tab-active: linear-gradient(95deg, #2A7DE1, #1E5EB0);
+            --tab-hover: #E2E8F0;
+            --login-bg: linear-gradient(135deg, #E8EDF5, #DCE3EC);
+            --login-card-bg: rgba(255, 255, 255, 0.95);
+            --fullscreen-btn-bg: #F1F4F9;
+            --fullscreen-btn-border: #CBD5E1;
+            --fullscreen-btn-hover: #2A7DE1;
+            --logout-btn-bg: rgba(220, 38, 38, 0.1);
+            --logout-btn-border: rgba(220, 38, 38, 0.3);
+            --logout-btn-hover: rgba(220, 38, 38, 0.2);
+            --badge-bg: #E2E8F0;
+            --gradient-text: linear-gradient(120deg, #1A1F2E, #2A7DE1);
+            --gradient-logo: linear-gradient(135deg, #1E6AD4, #00A3C4);
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --particle-color: rgba(42, 125, 225, 0.15);
+            --fullscreen-overlay: rgba(255, 255, 255, 0.98);
+            --summary-card: #FFFFFF;
+            --stat-bg: rgba(42, 125, 225, 0.08);
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        /* ========= INTERACTIVE LOGIN PAGE ========= */
+        .login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--login-bg);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease;
+            overflow: hidden;
+        }
+
+        .login-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--particle-color);
+            border-radius: 50%;
+            animation: float linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .login-card {
+            background: var(--login-card-bg);
+            backdrop-filter: blur(16px);
+            border-radius: 2rem;
+            width: 400px;
+            padding: 2.5rem 2rem;
+            border: 1px solid rgba(72, 187, 255, 0.3);
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            animation: fadeInUp 0.6s ease-out;
+            position: relative;
+            z-index: 1;
+        }
+
+        .login-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 35px 55px rgba(0, 160, 255, 0.2);
+            border-color: rgba(42, 125, 225, 0.6);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo-area {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #1E6AD4, #00C9FF);
+            border-radius: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            animation: pulse 2s infinite;
+            box-shadow: 0 0 20px rgba(42, 125, 225, 0.5);
+        }
+
+        .logo-icon i {
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(42, 125, 225, 0.5);
+            }
+
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 15px rgba(42, 125, 225, 0);
+            }
+
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(42, 125, 225, 0);
+            }
+        }
+
+        .logo-area h2 {
+            font-weight: 700;
+            font-size: 1.8rem;
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .logo-area p {
+            font-size: 0.8rem;
+            margin-top: 0.3rem;
+            color: var(--text-secondary);
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .input-group i.input-icon {
+            position: absolute;
+            left: 1rem;
+            bottom: 1rem;
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .input-group input {
+            width: 100%;
+            background: var(--bg-input);
+            border: 2px solid var(--border-input);
+            padding: 0.9rem 1rem 0.9rem 2.5rem;
+            border-radius: 1.2rem;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border-color: #2A7DE1;
+            box-shadow: 0 0 0 4px rgba(42, 125, 225, 0.2);
+            transform: scale(1.02);
+        }
+
+        .login-btn {
+            width: 100%;
+            background: linear-gradient(95deg, #1E6AD4, #1A4C8C);
+            border: none;
+            padding: 1rem;
+            border-radius: 2rem;
+            font-weight: 700;
+            font-size: 1rem;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .login-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .login-btn:hover::before {
+            left: 100%;
+        }
+
+        .login-btn:hover {
+            background: linear-gradient(95deg, #2A7DE1, #2366b0);
+            transform: scale(1.02);
+        }
+
+        .demo-hint {
+            text-align: center;
+            margin-top: 1.8rem;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border-color);
+            padding-top: 1rem;
+        }
+
+        /* ========= DASHBOARD APP ========= */
+        .app-wrapper {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            background: var(--bg-secondary);
+        }
+
+        .top-nav {
+            background: var(--bg-header);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.9rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            flex-shrink: 0;
+            transition: background 0.3s ease;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .brand i {
+            font-size: 1.8rem;
+            background: var(--gradient-logo);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .brand span {
+            font-weight: 700;
+            font-size: 1.3rem;
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .theme-toggle {
+            background: var(--fullscreen-btn-bg);
+            border: 1px solid var(--fullscreen-btn-border);
+            color: var(--text-secondary);
+            padding: 0.45rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .theme-toggle:hover {
+            background: var(--fullscreen-btn-hover);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .user-badge {
+            background: var(--tab-hover);
+            padding: 0.4rem 1rem;
+            border-radius: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .user-badge i {
+            font-size: 1rem;
+            color: #5F9EFF;
+        }
+
+        .logout-btn {
+            background: var(--logout-btn-bg);
+            border: 1px solid var(--logout-btn-border);
+            color: #FF8A92;
+            padding: 0.45rem 1.2rem;
+            border-radius: 2rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: var(--logout-btn-hover);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .dashboard-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+        }
+
+        /* ========= EXECUTIVE SUMMARY SECTION ========= */
+        .summary-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .summary-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            border-left: 4px solid #2A7DE1;
+            padding-left: 1rem;
+        }
+
+        .summary-title i {
+            font-size: 1.8rem;
+            color: #2A7DE1;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-card {
+            background: var(--summary-card);
+            border-radius: 1rem;
+            padding: 1.2rem;
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px var(--shadow-color);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            border-color: #2A7DE1;
+            box-shadow: 0 8px 20px rgba(42, 125, 225, 0.15);
+        }
+
+        .stat-icon {
+            width: 45px;
+            height: 45px;
+            background: var(--stat-bg);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .stat-icon i {
+            font-size: 1.5rem;
+            color: #2A7DE1;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 0.3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-trend {
+            font-size: 0.7rem;
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .trend-up {
+            color: #10b981;
+        }
+
+        .trend-down {
+            color: #ef4444;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.2rem;
+        }
+
+        .kpi-card {
+            background: var(--summary-card);
+            border-radius: 1rem;
+            padding: 1rem;
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+        }
+
+        .kpi-card:hover {
+            border-color: #2A7DE1;
+        }
+
+        .kpi-title {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .kpi-value {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .kpi-sub {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 0.3rem;
+        }
+
+        /* Section Divider */
+        .section-divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 2rem 0 1.5rem 0;
+        }
+
+        .section-divider-line {
+            flex: 1;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        .section-divider-text {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Dashboard Grid - 2x3 Layout */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            align-items: start;
+            justify-items: stretch;
+        }
+
+        .iframe-card {
+            background: var(--bg-card);
+            border-radius: 1rem;
+            border: 1px solid var(--border-light);
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            box-shadow: 0 8px 20px var(--shadow-color);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: auto;
+            min-height: 480px;
+            cursor: pointer;
+        }
+
+        .click-hint {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            z-index: 10;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .iframe-card:hover .click-hint {
+            opacity: 1;
+            background: rgba(42, 125, 225, 0.8);
+        }
+
+        .iframe-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: linear-gradient(135deg,
+                    rgba(42, 125, 225, 0) 0%,
+                    rgba(42, 125, 225, 0.05) 50%,
+                    rgba(42, 125, 225, 0) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .iframe-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(42, 125, 225, 0.25), 0 0 0 2px rgba(42, 125, 225, 0.3);
+            border-color: #2A7DE1;
+        }
+
+        .iframe-card:hover::before {
+            opacity: 1;
+        }
+
+        .iframe-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(115deg,
+                    transparent 30%,
+                    rgba(255, 255, 255, 0.1) 45%,
+                    rgba(255, 255, 255, 0.15) 50%,
+                    transparent 55%);
+            transform: rotate(25deg);
+            transition: transform 0.6s ease;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .iframe-card:hover::after {
+            opacity: 1;
+            transform: rotate(25deg) translate(10%, 10%);
+        }
+
+        .card-header {
+            background: var(--bg-header);
+            padding: 0.9rem 1.2rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            transition: background 0.3s ease;
+            position: relative;
+            z-index: 3;
+            flex-shrink: 0;
+        }
+
+        .card-header h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .badge-cognos {
+            background: var(--badge-bg);
+            padding: 0.2rem 0.7rem;
+            border-radius: 2rem;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .iframe-wrapper {
+            position: relative;
+            width: 100%;
+            background: var(--bg-primary);
+            transition: all 0.3s ease;
+            flex: 1;
+            display: flex;
+            pointer-events: none;
+        }
+
+        .cognos-iframe {
+            width: 100%;
+            height: 450px;
+            border: none;
+            background: var(--bg-primary);
+            display: block;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .fullscreen-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--fullscreen-overlay);
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .fullscreen-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: var(--bg-header);
+            border-bottom: 1px solid var(--border-color);
+            flex-shrink: 0;
+        }
+
+        .fullscreen-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .fullscreen-title i {
+            font-size: 1.5rem;
+            color: #2A7DE1;
+        }
+
+        .fullscreen-title h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .close-fullscreen {
+            background: var(--logout-btn-bg);
+            border: 1px solid var(--logout-btn-border);
+            color: #FF8A92;
+            padding: 0.5rem 1.2rem;
+            border-radius: 2rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .close-fullscreen:hover {
+            background: var(--logout-btn-hover);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .fullscreen-iframe-wrapper {
+            flex: 1;
+            width: 100%;
+            padding: 1rem;
+        }
+
+        .fullscreen-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 0.5rem;
+            background: var(--bg-primary);
+        }
+
+        @media (max-width: 1024px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .kpi-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .kpi-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cognos-iframe {
+                height: 400px;
+            }
+
+            .dashboard-container {
+                padding: 1rem;
+            }
+
+            .top-nav {
+                padding: 0.8rem 1rem;
+            }
+        }
+
+        .footer-note {
+            text-align: center;
+            padding: 1rem;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            margin-top: 1.5rem;
+        }
+    </style>
+</head>
+
+<body class="dark-theme">
+
+    <div id="loginOverlay" class="login-overlay">
+        <div class="particles" id="particles"></div>
+        <div class="login-card">
+            <div class="logo-area">
+                <div class="logo-icon"><i class="fas fa-chart-line"></i></div>
+                <h2>IBM Cognos Analytics</h2>
+                <p>Enterprise Dashboard Suite</p>
+            </div>
+            <div class="input-group">
+                <label>Email / Username</label>
+                <i class="fas fa-user input-icon"></i>
+                <input type="text" id="loginUsername" placeholder="sherwin@cognos.com" value="sherwin@cognos.com">
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <i class="fas fa-key input-icon"></i>
+                <input type="password" id="loginPassword" placeholder="••••••••" value="cognos123">
+            </div>
+            <button class="login-btn" id="doLoginBtn"><i class="fas fa-arrow-right-to-bracket"></i> &nbsp; Secure
+                Login</button>
+            <div class="demo-hint">
+                <i class="fas fa-info-circle"></i> Demo: Enter any email and password | Executive Summary + Q1-Q6
+                Dashboards
+            </div>
+        </div>
+    </div>
+
+    <div id="dashboardApp" style="display: none;" class="app-wrapper">
+        <div class="top-nav">
+            <div class="brand">
+                <i class="fas fa-database"></i>
+                <span>COGNOS | INSIGHTS</span>
+            </div>
+            <div class="user-info">
+                <button id="themeToggleBtn" class="theme-toggle">
+                    <i class="fas fa-sun"></i><span>Light Mode</span>
+                </button>
+                <div class="user-badge">
+                    <i class="fas fa-user-astronaut"></i>
+                    <span id="displayUserName">Analyst</span>
+                </div>
+                <button id="logoutButtonNav" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+        </div>
+
+        <div class="dashboard-container">
+            <!-- EXECUTIVE SUMMARY SECTION -->
+            <div class="summary-section">
+                <div class="summary-title">
+                    <i class="fas fa-chart-pie"></i>
+                    <span>Executive Summary</span>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-dollar-sign"></i></div>
+                        <div class="stat-value">$2.4M</div>
+                        <div class="stat-label">Total Revenue</div>
+                        <div class="stat-trend"><i class="fas fa-arrow-up trend-up"></i><span class="trend-up">+12.5% vs
+                                last quarter</span></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-users"></i></div>
+                        <div class="stat-value">8,942</div>
+                        <div class="stat-label">Active Customers</div>
+                        <div class="stat-trend"><i class="fas fa-arrow-up trend-up"></i><span class="trend-up">+8.3%
+                                growth</span></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
+                        <div class="stat-value">94.2%</div>
+                        <div class="stat-label">Customer Satisfaction</div>
+                        <div class="stat-trend"><i class="fas fa-arrow-up trend-up"></i><span
+                                class="trend-up">+2.1%</span></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                        <div class="stat-value">2.4 Days</div>
+                        <div class="stat-label">Avg. Claim Settlement</div>
+                        <div class="stat-trend"><i class="fas fa-arrow-down trend-down"></i><span
+                                class="trend-down">-0.8 days improvement</span></div>
+                    </div>
+                </div>
+
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-title">Sales Performance</div>
+                        <div class="kpi-value">$1.8M</div>
+                        <div class="kpi-sub">Q1 Target: $1.6M | 112% Achieved</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-title">Claims Processed</div>
+                        <div class="kpi-value">3,247</div>
+                        <div class="kpi-sub">This month | +342 vs last month</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-title">Active Policies</div>
+                        <div class="kpi-value">12,543</div>
+                        <div class="kpi-sub">Year to Date | +1,234 new</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION DIVIDER -->
+            <div class="section-divider">
+                <div class="section-divider-line"></div>
+                <div class="section-divider-text">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Detailed Dashboard Analysis (Q1 - Q6)</span>
+                </div>
+                <div class="section-divider-line"></div>
+            </div>
+
+            <!-- Q1 TO Q6 DASHBOARDS GRID -->
+            <div class="dashboard-grid" id="dashboardGrid"></div>
+
+            <div class="footer-note">
+                <i class="fas fa-mouse-pointer"></i> Click on any dashboard to open in fullscreen • Hover for mirror
+                shine effect
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            function createParticles() {
+                const container = document.getElementById('particles');
+                if (!container) return;
+                for (let i = 0; i < 50; i++) {
+                    const particle = document.createElement('div');
+                    particle.classList.add('particle');
+                    const size = Math.random() * 6 + 2;
+                    particle.style.width = size + 'px';
+                    particle.style.height = size + 'px';
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.animationDuration = Math.random() * 10 + 5 + 's';
+                    particle.style.animationDelay = Math.random() * 10 + 's';
+                    particle.style.opacity = Math.random() * 0.5 + 0.2;
+                    container.appendChild(particle);
+                }
+            }
+
+            function initTheme() {
+                const savedTheme = localStorage.getItem('cognos_theme');
+                if (savedTheme === 'light') {
+                    document.body.classList.remove('dark-theme');
+                    document.body.classList.add('light-theme');
+                    updateThemeButtonText(true);
+                } else {
+                    document.body.classList.remove('light-theme');
+                    document.body.classList.add('dark-theme');
+                    updateThemeButtonText(false);
+                }
+            }
+
+            function updateThemeButtonText(isLight) {
+                const themeBtn = document.getElementById('themeToggleBtn');
+                if (themeBtn) {
+                    themeBtn.innerHTML = isLight ? '<i class="fas fa-moon"></i><span>Dark Mode</span>' : '<i class="fas fa-sun"></i><span>Light Mode</span>';
+                }
+            }
+
+            function toggleTheme() {
+                if (document.body.classList.contains('dark-theme')) {
+                    document.body.classList.remove('dark-theme');
+                    document.body.classList.add('light-theme');
+                    localStorage.setItem('cognos_theme', 'light');
+                    updateThemeButtonText(true);
+                } else {
+                    document.body.classList.remove('light-theme');
+                    document.body.classList.add('dark-theme');
+                    localStorage.setItem('cognos_theme', 'dark');
+                    updateThemeButtonText(false);
+                }
+            }
+
+            function openDashboardFullscreen(dashboardId, dashboardName, dashboardSrc) {
+                const modal = document.createElement('div');
+                modal.className = 'fullscreen-modal';
+                modal.innerHTML = `
+                    <div class="fullscreen-header">
+                        <div class="fullscreen-title">
+                            <i class="fas fa-chart-line"></i>
+                            <h2>${dashboardName}</h2>
+                        </div>
+                        <button class="close-fullscreen" id="closeFullscreenBtn">
+                            <i class="fas fa-times"></i><span>Exit Fullscreen</span>
+                        </button>
+                    </div>
+                    <div class="fullscreen-iframe-wrapper">
+                        <iframe class="fullscreen-iframe" src="${dashboardSrc}" frameborder="0" allow="encrypted-media; fullscreen" allowfullscreen></iframe>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+                document.body.style.overflow = 'hidden';
+                const closeBtn = document.getElementById('closeFullscreenBtn');
+                if (closeBtn) closeBtn.addEventListener('click', () => { modal.remove(); document.body.style.overflow = ''; });
+                const escapeHandler = (e) => { if (e.key === 'Escape') { modal.remove(); document.body.style.overflow = ''; document.removeEventListener('keydown', escapeHandler); } };
+                document.addEventListener('keydown', escapeHandler);
+                modal.addEventListener('click', (e) => { if (e.target === modal) { modal.remove(); document.body.style.overflow = ''; document.removeEventListener('keydown', escapeHandler); } });
+            }
+
+            const loginOverlay = document.getElementById('loginOverlay');
+            const dashboardApp = document.getElementById('dashboardApp');
+            const loginBtn = document.getElementById('doLoginBtn');
+            const usernameInput = document.getElementById('loginUsername');
+            const passwordInput = document.getElementById('loginPassword');
+            const displayUserNameSpan = document.getElementById('displayUserName');
+            const logoutBtn = document.getElementById('logoutButtonNav');
+
+            const dashboards = [
+                { id: 'Q1', name: 'Q1 - Sales Performance', icon: 'fa-chart-line', src: 'https://ap2.ca.analytics.ibm.com/bi/?pathRef=.my_folders%2FQ1&closeWindowOnLastView=true&ui_appbar=false&ui_navbar=false&shareMode=embedded&action=run&format=HTML&prompt=false&nav_filter=true' },
+                { id: 'Q2', name: 'Q2 - Regional Trends', icon: 'fa-chart-line', src: 'https://ap2.ca.analytics.ibm.com/bi/?pathRef=.my_folders%2FQ2&closeWindowOnLastView=true&ui_appbar=false&ui_navbar=false&shareMode=embedded&action=run&format=HTML&prompt=false&nav_filter=true' },
+                { id: 'Q3', name: 'Q3 - Product Analytics', icon: 'fa-chart-line', src: 'https://ap2.ca.analytics.ibm.com/bi/?pathRef=.my_folders%2FQ3&closeWindowOnLastView=true&ui_appbar=false&ui_navbar=false&shareMode=embedded&action=run&format=HTML&prompt=false&promptParameters=%5B%7B%22name%22%3A%22Parameter2%22%2C%22value%22%3A%5B%5D%7D%2C%7B%22name%22%3A%22Parameter1%22%2C%22value%22%3A%5B%7B%22use%22%3A%22Life%22%2C%22display%22%3A%22Life%22%7D%5D%7D%5D&nav_filter=true' },
+                { id: 'Q4', name: 'Q4 - Deep Exploration', icon: 'fa-chart-line', src: 'https://ap2.ca.analytics.ibm.com/bi/?perspective=explore&pathRef=.my_folders%2FQ4&closeWindowOnLastView=true&ui_appbar=false&ui_navbar=false&shareMode=embedded&subView=model0000019d6b7744de_00000000&nav_filter=true' },
+                { id: 'Q5', name: 'Q5 - Executive Dashboard', icon: 'fa-chart-line', src: 'https://ap2.ca.analytics.ibm.com/bi/?perspective=dashboard&pathRef=.my_folders%2FQ5&closeWindowOnLastView=true&ui_appbar=false&ui_navbar=false&shareMode=embedded&action=view&mode=dashboard&subView=model0000019d6bbe5a5c_00000000&nav_filter=true' },
+                { id: 'Q6', name: 'Q6 - Data Storytelling', icon: 'fa-chart-line', src: 'https://ap2.ca.analytics.ibm.com/bi/?perspective=story&pathRef=.my_folders%2FQ6&closeWindowOnLastView=true&ui_appbar=false&ui_navbar=false&shareMode=embedded&action=view&sceneId=model0000019d6c1d073c_00000001&sceneTime=0&nav_filter=true' }
+            ];
+
+            function checkExistingSession() {
+                const isLoggedIn = localStorage.getItem('cognos_auth');
+                const savedUser = localStorage.getItem('cognos_user');
+                if (isLoggedIn === 'true' && savedUser) {
+                    displayUserNameSpan.innerText = savedUser;
+                    loginOverlay.classList.add('hidden');
+                    dashboardApp.style.display = 'flex';
+                    buildDashboardGrid();
+                    return true;
+                }
+                return false;
+            }
+
+            function handleLogin() {
+                const username = usernameInput.value;
+                const password = passwordInput.value;
+                if (username && username.trim() !== "" && password && password.trim() !== "") {
+                    localStorage.setItem('cognos_auth', 'true');
+                    localStorage.setItem('cognos_user', username.trim());
+                    displayUserNameSpan.innerText = username.trim();
+                    loginOverlay.classList.add('hidden');
+                    dashboardApp.style.display = 'flex';
+                    buildDashboardGrid();
+                } else {
+                    alert("Please enter valid credentials (any email and password works)");
+                }
+            }
+
+            function handleLogout() {
+                localStorage.removeItem('cognos_auth');
+                localStorage.removeItem('cognos_user');
+                dashboardApp.style.display = 'none';
+                loginOverlay.classList.remove('hidden');
+                usernameInput.value = 'sherwin@cognos.com';
+                passwordInput.value = 'cognos123';
+            }
+
+            loginBtn.addEventListener('click', handleLogin);
+            logoutBtn.addEventListener('click', handleLogout);
+            [usernameInput, passwordInput].forEach(field => {
+                field.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleLogin(); });
+            });
+
+            function buildDashboardGrid() {
+                const grid = document.getElementById('dashboardGrid');
+                if (!grid) return;
+                grid.innerHTML = '';
+                dashboards.forEach((dashboard) => {
+                    const card = document.createElement('div');
+                    card.className = 'iframe-card';
+                    card.addEventListener('click', () => openDashboardFullscreen(dashboard.id, dashboard.name, dashboard.src));
+                    card.innerHTML = `
+                        <div class="card-header">
+                            <h3><i class="fas ${dashboard.icon}"></i> ${dashboard.name}</h3>
+                            <span class="badge-cognos"><i class="fab fa-ibm"></i> Cognos Report</span>
+                        </div>
+                        <div class="iframe-wrapper">
+                            <iframe class="cognos-iframe" src="${dashboard.src}" frameborder="0" allow="encrypted-media; fullscreen" allowfullscreen></iframe>
+                        </div>
+                        <div class="click-hint"><i class="fas fa-expand"></i><span>Click to open fullscreen</span></div>
+                    `;
+                    grid.appendChild(card);
+                });
+            }
+
+            createParticles();
+            initTheme();
+            document.getElementById('themeToggleBtn').addEventListener('click', toggleTheme);
+            if (!checkExistingSession()) {
+                loginOverlay.classList.remove('hidden');
+                dashboardApp.style.display = 'none';
+            }
+        })();
+    </script>
+</body>
+
+</html>
+
+
